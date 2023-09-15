@@ -25,9 +25,6 @@ const Home = ({ name, setName, fetchQuestions }) => {
 
   return (
     <div className="content">
-      <div className="settings">
-        <span>Quiz Settings</span>
-
         <div className="settings_select">
           {error && <ErrorMessage>Cannot leave blank</ErrorMessage>}
 
@@ -80,7 +77,6 @@ const Home = ({ name, setName, fetchQuestions }) => {
             Start Quiz
           </Button>
         </div>
-      </div>
 
       <img src="quiz.svg" className="banner" alt="quiz img" />
     </div>

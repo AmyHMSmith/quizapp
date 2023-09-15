@@ -11,6 +11,7 @@ import axios from "axios";
 const App = () => {
   const [name, setName] = useState("");
   const [questions, setQuestions] = useState("");
+  const [score, setScore] = useState(0);
 
   const fetchQuestions = async (category = "", difficulty = "") => {
     const { data } = await axios.get(
@@ -19,7 +20,7 @@ const App = () => {
       }${difficulty && `&difficulty=${difficulty}`}&type=multiple`
     );
 
-    console.log(data);
+    setQuestions(data.results);
   };
 
   return (
@@ -38,7 +39,18 @@ const App = () => {
               />
             }
           />
-          <Route path="/quiz" element={<Quiz />} />
+          <Route
+            path="/quiz"
+            element={
+              <Quiz
+                name={name}
+                questions={questions}
+                score={score}
+                setScore={setScore}
+                setQuestions={setQuestions}
+              />
+            }
+          />
           <Route path="/result" element={<Result />} />
         </Routes>
       </div>
