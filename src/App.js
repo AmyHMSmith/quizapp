@@ -51,7 +51,10 @@ const App = () => {
               />
             }
           />
-          <Route path="/result" element={<Result />} />
+          <Route
+            path="/result"
+            element={<Result name={name} score={score} />}
+          />
         </Routes>
       </div>
 

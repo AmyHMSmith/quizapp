@@ -1,9 +1,31 @@
-import React from 'react'
+import { Button } from "@material-ui/core";
+import { useEffect } from "react";
+import { useNavigate } from "react-router";
+import "../styles/Result.css";
 
-const Result = () => {
+const Result = ({ name, score }) => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!name) {
+      navigate("/");
+    }
+  }, [name, navigate]);
+
   return (
-    <div>Result</div>
-  )
-}
+    <div className="result">
+      <span className="title">Final Score : {score}</span>
+      <Button
+        variant="contained"
+        color="secondary"
+        size="large"
+        style={{ alignSelf: "center", marginTop: 20 }}
+        href="/"
+      >
+        Go to homepage
+      </Button>
+    </div>
+  );
+};
 
-export default Result
+export default Result;

@@ -4,6 +4,11 @@ import { useNavigate } from "react-router";
 import "../styles/Question.css";
 import ErrorMessage from "./ErrorMessage";
 
+const decode = (str) => {
+  const txt = new DOMParser().parseFromString(str, "text/html");
+  return txt.documentElement.textContent;
+};
+
 const Question = ({
   currQues,
   setCurrQues,
@@ -33,11 +38,11 @@ const Question = ({
 
   const handleNext = () => {
     if (currQues > 8) {
-      navigate.push("/result");
+      navigate("/result");
     } else if (selected) {
       setCurrQues(currQues + 1);
       setSelected();
-    } else setError("Please select an option first");
+    } else setError("Please select an answer");
   };
 
   const handleQuit = () => {
@@ -47,21 +52,21 @@ const Question = ({
 
   return (
     <div className="question">
-      <h1>Question {currQues + 1} :</h1>
+      <h1>Question {currQues + 1}</h1>
 
       <div className="singleQuestion">
-        <h2>{questions[currQues].question}</h2>
+        <h2>{decode(questions[currQues].question)}</h2>
         <div className="options">
           {error && <ErrorMessage>{error}</ErrorMessage>}
           {options &&
-            options.map((i) => (
+            options.map((answer) => (
               <button
-                className={`singleOption  ${selected && handleSelect(i)}`}
-                key={i}
-                onClick={() => handleCheck(i)}
+                className={`singleOption  ${selected && handleSelect(answer)}`}
+                key={answer}
+                onClick={() => handleCheck(answer)}
                 disabled={selected}
               >
-                {i}
+                {decode(answer)}
               </button>
             ))}
         </div>
